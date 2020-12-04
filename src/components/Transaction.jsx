@@ -10,8 +10,9 @@ import { Context } from '../context/GlobalState';
   <div>
    
     <li className= {transaction.amount < 0 ? "minus" : "plus"}>
-     {transaction.text} <span>{sign} ${Math.abs(transaction.amount)} 
+     {transaction.text} <span>{sign} ৳{Math.abs(transaction.amount)} 
      </span><button onClick={() =>dispatch({ type: 'delete', id: transaction.id}) } className="delete-btn">x</button>
+     <p>05-12-2020</p>
      </li>
   
   </div>

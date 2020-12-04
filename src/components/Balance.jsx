@@ -5,12 +5,12 @@ export const Balance = () => {
  const { transactions } = useContext(Context);
  
  const amounts =  transactions.map(transaction => transaction.amount );
- const total = amounts != '' ? amounts.reduce(( acc, item ) => (acc += item )).toFixed(2): "Empty"
+ const total = amounts != '' ? amounts.reduce(( acc, item ) => (acc += item )).toFixed(2): "0.00"
 
  return (
   <>
    <h3 className="balancer-title">Your Balance</h3>
-   <p className="balance">${total} </p>
+   <p className="balance">৳ {total} </p>
   </>
  )
 }

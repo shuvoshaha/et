@@ -8,13 +8,15 @@ export const AddTransaction = () => {
 
  const onSubmitHandler = (e) => {
   e.preventDefault()
+  document.getElementById("reset").reset();
+  
   const data = {
    id: Math.floor(Math.random() * 1000),
    text,
-   amount: +amount
+   amount: +amount,
   }
   dispatch({ type: 'AddItem', AddTransanction: data });
-  document.getElementById("reset").reset();
+  
  }
  
  return (
@@ -28,7 +30,7 @@ export const AddTransaction = () => {
       type="text"
       placeholder="Enter text..."
       onChange={(e) => setText(e.target.value)}
-      value={text}
+     
      />
     </div>
 
@@ -40,7 +42,7 @@ export const AddTransaction = () => {
      <input
       type="number"
       placeholder="Enter amount..."
-      value={amount}
+  
       onChange={(e) => setAmount(e.target.value)}
      />
     </div>
