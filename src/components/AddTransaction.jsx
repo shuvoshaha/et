@@ -4,7 +4,11 @@ import { Context } from '../context/GlobalState'
 export const AddTransaction = () => {
  const { dispatch } = React.useContext(Context)
  const [text, setText] = React.useState('');
- const [amount, setAmount] = React.useState('')
+ const [amount, setAmount] = React.useState('');
+
+ const date = new Date().getDay();
+
+ console.log(date)
 
  const onSubmitHandler = (e) => {
   e.preventDefault()
@@ -36,7 +40,7 @@ export const AddTransaction = () => {
 
     <div className="form-control">
      <label htmlFor="amount">Amount <br />
-     (negative - expense, positive - income)
+     (negative - expense, positive + income)
      </label>
 
      <input
