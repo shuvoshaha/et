@@ -44,7 +44,7 @@ export const AddTransaction = () => {
      </label>
 
      <input
-      type="number"
+      type="text"
       placeholder="Enter amount..."
   
       onChange={(e) => setAmount(e.target.value)}
