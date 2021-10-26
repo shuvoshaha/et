@@ -145,3 +145,8 @@ input[type="number"]{
 .list li.plus{
   border-right: 4px solid #2ecc71; 
 }
+
+.error{
+  font-size: 0.875rem;
+  color: crimson;
+}

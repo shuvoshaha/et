@@ -9,9 +9,10 @@ export const TransantionList = () => {
   <>
     <h3>History</h3>
     <ul id="list" className="list">
-       { transactions.map( transaction => (
-        <Transaction key={transaction.id} transaction={transaction} />
-        ))}
+       { transactions.length ? transactions.map((transaction) =>{
+         return( <Transaction key={transaction.id} transaction={transaction} />
+         )
+       }) : <p> There is no transactions </p> }
     </ul>
   </>
  )

@@ -1,57 +1,81 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Context } from '../context/GlobalState'
+import validator from './Validator';
+import { v4 as uuid4 } from 'uuid'
 
 export const AddTransaction = () => {
- const { dispatch } = React.useContext(Context)
- const [text, setText] = React.useState('');
- const [amount, setAmount] = React.useState('');
-
- const date = new Date().getDay();
-
- console.log(date)
-
- const onSubmitHandler = (e) => {
-  e.preventDefault()
-  document.getElementById("reset").reset();
-  
-  const data = {
-   id: Math.floor(Math.random() * 1000),
-   text,
-   amount: +amount,
+  const initState = {
+    text: '',
+    amount: '',
   }
-  dispatch({ type: 'AddItem', AddTransanction: data });
-  
- }
- 
- return (
-  <>
-   <h3>Add new transaction</h3>
-   <form onSubmit={onSubmitHandler} id="reset">
-    <div className="form-control">
-     <label htmlFor="text">Text</label>
+  const { dispatch } = React.useContext(Context)
+  const [formData, setFormData] = React.useState(initState);
+  const [err, setError] = React.useState(formData)
 
-     <input
-      type="text"
-      placeholder="Enter text..."
-      onChange={(e) => setText(e.target.value)}
-     
-     />
-    </div>
+  const onchangeHandle = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
 
-    <div className="form-control">
-     <label htmlFor="amount">Amount <br />
-     (negative - expense, positive + income)
-     </label>
+  const data = {
+    // id: Math.floor(Math.random() * 1000 * 100000),
+    id: uuid4(),
+    text: formData.text,
+    amount: +formData.amount,
+    date: new Date().getDate(),
+  }
 
-     <input
-      type="text"
-      placeholder="Enter amount..."
-  
-      onChange={(e) => setAmount(e.target.value)}
-     />
-    </div>
-    <input type="submit" className="btn" value="Add Transaction" />
-   </form>
-  </>
- )
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault()
+    setError(validator(formData))
+  }
+
+  useEffect(() => {
+    if (Object.keys(err).length === 0) {
+      setFormData(initState);
+      dispatch({ type: 'AddItem', AddTransanction: data });
+      
+      
+    }
+  }, [err])
+
+  return (
+    <>
+      <h3>Add new transaction</h3>
+      <form onSubmit={onSubmitHandler} id="reset">
+        <div className="form-control">
+          <label htmlFor="text">Text</label>
+
+          <input
+            type="text"
+            placeholder="Enter text..."
+            onChange={onchangeHandle}
+            name="text"
+            value={formData.text}
+          />
+          {err.text && <span className="error">{err.text}  </span>}
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="amount">Amount <br />
+            (negative - expense, positive + income)
+          </label>
+
+          <input
+            type="number"
+            placeholder="Enter amount..."
+            onChange={onchangeHandle}
+            name="amount"
+            value={formData.amount}
+
+          />
+          {err.amount && <span className="error">{err.amount}  </span>}
+        </div>
+        <input type="submit" className="btn" value="Add Transaction" />
+      </form>
+    </>
+  )
 }

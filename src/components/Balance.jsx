@@ -5,7 +5,7 @@ export const Balance = () => {
  const { transactions } = useContext(Context);
  
  const amounts =  transactions.map(transaction => transaction.amount );
- const total = amounts != '' ? amounts.reduce(( acc, item ) => (acc += item )).toFixed(2): "0.00"
+ const total = amounts !== '' ? amounts.reduce(( acc, item ) => (acc += item ), 0).toFixed(2): "0.00"
 
  return (
   <>
