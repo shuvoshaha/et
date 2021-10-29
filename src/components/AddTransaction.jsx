@@ -3,11 +3,12 @@ import { Context } from '../context/GlobalState'
 import validator from './Validator';
 import { v4 as uuid4 } from 'uuid'
 
+const initState = {
+  text: '',
+  amount: '',
+}
 export const AddTransaction = () => {
-  const initState = {
-    text: '',
-    amount: '',
-  }
+ 
   const { dispatch } = React.useContext(Context)
   const [formData, setFormData] = React.useState(initState);
   const [err, setError] = React.useState(formData)
@@ -42,7 +43,7 @@ export const AddTransaction = () => {
       
       
     }
-  }, [err])
+  }, [err, data, dispatch])
 
   return (
     <>
