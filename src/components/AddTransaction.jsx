@@ -24,8 +24,10 @@ export const AddTransaction = () => {
     id: uuid4(),
     text: formData.text,
     amount: +formData.amount,
-    date: new Date().getDate(),
+    date: (new Date()).toLocaleString(),
   }
+
+  // console.log( (Date.now()).toLocaleString())
 
 
   const onSubmitHandler = (e) => {
